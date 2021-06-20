@@ -1,15 +1,13 @@
+const { Sequelize } = require("sequelize/types");
 
-const users = (sequelize, Sequelize) => {
+const user = (sequelize, Sequelize) => {
     const user = sequelize.define("users", {
-        userId: {
+        UniqueUserId: {
             primaryKey: true,
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4
         },
-        firstName: {
-            type: Sequelize.STRING
-        },
-        lastName: {
+        fullName: {
             type: Sequelize.STRING
         },
         password: {
@@ -18,8 +16,15 @@ const users = (sequelize, Sequelize) => {
         email: {
             type: Sequelize.STRING
         },
-        phoneNumber: {
-            type: Sequelize.INTEGER
+
+        sex: {
+            type: Sequelize.STRING
+        },
+        birthday: {
+            type: Sequelize.DATE
+        },
+        isDoctor: {
+            type: Sequelize.BOOLEAN
         }
     }, {
         // disable the modification of table names; By default, sequelize will automatically
@@ -31,3 +36,41 @@ const users = (sequelize, Sequelize) => {
     return user;
 };
 
+const scoreCard = (sequelize, Sequelize) => {
+    const scoreCard = sequelize.define("scoreCards", {
+
+        height: {
+            type: Sequelize.INTEGER
+        },
+        weight: {
+            type: Sequelize.INTEGER
+        },
+        googleFitScore: {
+            type: Sequelize.INTEGER
+        }
+
+    }, {
+        freezeTableName: true
+    })
+
+    return scoreCard
+}
+
+const healthJournal = (sequelize, Sequelize) => {
+    const healthJournal = sequelize.define("healthJournals", {
+        title: {
+            type: Sequelize.STRING
+        },
+        description: {
+            type: Sequelize.TEXT
+        },
+        comment: {
+            type: Sequelize.TEXT
+        }
+
+    })
+}
+
+module.exports = {
+    user, healthJournal, scoreCard
+}
