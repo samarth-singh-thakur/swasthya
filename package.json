@@ -1,0 +1,24 @@
+{
+  "name": "swasthya-backend",
+  "version": "1.0.0",
+  "description": "Update",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samarth-singh-thakur/swasthya.git"
+  },
+  "author": "Aayushi Samarth Shashank Yashika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samarth-singh-thakur/swasthya/issues"
+  },
+  "homepage": "https://github.com/samarth-singh-thakur/swasthya#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.6.2"
+  }
+}
