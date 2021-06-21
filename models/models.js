@@ -1,11 +1,9 @@
-const { Sequelize } = require("sequelize/types");
-
 const user = (sequelize, Sequelize) => {
     const user = sequelize.define("users", {
-        UniqueUserId: {
+        user_id: {
             primaryKey: true,
-            type: Sequelize.UUID,
-            defaultValue: Sequelize.UUIDV4
+            type: Sequelize.STRING,
+
         },
         fullName: {
             type: Sequelize.STRING
