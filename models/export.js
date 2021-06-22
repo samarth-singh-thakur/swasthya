@@ -26,10 +26,10 @@ database.scoreCard = scoreCard(sequelize, Sequelize);
 database.doctor = doctor(sequelize, Sequelize);
 
 database.user.hasMany(database.scoreCard, {
+    foreignKey : 'userID'
 })
 
-
-database.scoreCard.belongsTo(database.user, {})
+database.scoreCard.belongsTo(database.user)
 
 module.exports = {
     database

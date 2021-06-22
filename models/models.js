@@ -77,11 +77,7 @@ const scoreCard = (sequelize, Sequelize) => {
     const scoreCard = sequelize.define("scoreCards", {
 
         userID: {
-            type: Sequelize.STRING,
-            references: {         // User belongsTo Company 1:1
-                model: 'user',
-                key: 'user_id'
-              }
+            type: Sequelize.STRING
         },
         height: {
             type: Sequelize.INTEGER
