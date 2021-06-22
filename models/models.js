@@ -5,6 +5,11 @@ const user = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
 
         },
+
+        doctorID: {
+            type: Sequelize.STRING
+        },
+
         username: {
             type: Sequelize.STRING
         },
@@ -33,12 +38,13 @@ const user = (sequelize, Sequelize) => {
 
 
 const doctor = (sequelize, Sequelize) => {
-    const user = sequelize.define("doctors", {
-        user_id: {
+    const doctor = sequelize.define("doctors", {
+        doctor_id: {
             primaryKey: true,
             type: Sequelize.STRING,
 
         },
+
         username: {
             type: Sequelize.STRING
         },
@@ -97,6 +103,10 @@ const scoreCard = (sequelize, Sequelize) => {
 
 const healthJournal = (sequelize, Sequelize) => {
     const healthJournal = sequelize.define("healthJournals", {
+
+        userID: {
+            type: Sequelize.STRING
+        },
         title: {
             type: Sequelize.STRING
         },
@@ -107,9 +117,30 @@ const healthJournal = (sequelize, Sequelize) => {
             type: Sequelize.TEXT
         }
 
+    }, {
+        freezeTableName: true
     })
+
+    return healthJournal
 }
 
+const consult = (sequelize, Sequelize) => {
+    const consult = sequelize.define("consults", {
+
+        userID: {
+            type: Sequelize.STRING
+        },
+        doctorID: {
+            type: Sequelize.STRING
+        }
+    }, {
+        freezeTableName: true
+    })
+
+    return consult
+}
+
+
 module.exports = {
-    user, healthJournal, scoreCard, doctor
+    user, healthJournal, scoreCard, doctor, consult
 }

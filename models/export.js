@@ -19,17 +19,26 @@ database = {};
 database.Sequelize = Sequelize;
 database.sequelize = sequelize;
 
-const { user,  healthJournal, scoreCard, doctor } = require("./models.js");
+const { user,  healthJournal, scoreCard, doctor, consult } = require("./models.js");
 database.user = user(sequelize, Sequelize);
 database.healthJournal = healthJournal(sequelize, Sequelize);
 database.scoreCard = scoreCard(sequelize, Sequelize);
 database.doctor = doctor(sequelize, Sequelize);
+database.consult = consult(sequelize, Sequelize);
 
-database.user.hasMany(database.scoreCard, {
-    foreignKey : 'userID'
+database.user.hasMany(database.scoreCard)
+database.scoreCard.belongsTo(database.user, {
+    foreignKey:'userID'
 })
 
-database.scoreCard.belongsTo(database.user)
+database.user.hasMany(database.healthJournal)
+database.healthJournal.belongsTo(database.user, {
+    foreignKey:'userID'
+})
+
+database.doctor.belongsToMany(database.user, {through: database.consult, foreignKey:'doctorID', otherKey:'userID'})
+database.user.belongsToMany(database.doctor, {through: database.consult, foreignKey:'userID', otherKey:'doctorID'})
+
 
 module.exports = {
     database
