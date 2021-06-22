@@ -5,7 +5,7 @@ const user = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
 
         },
-        fullName: {
+        username: {
             type: Sequelize.STRING
         },
         password: {
@@ -14,15 +14,11 @@ const user = (sequelize, Sequelize) => {
         email: {
             type: Sequelize.STRING
         },
-
         sex: {
             type: Sequelize.STRING
         },
         birthday: {
             type: Sequelize.DATE
-        },
-        isDoctor: {
-            type: Sequelize.BOOLEAN
         }
     }, {
         // disable the modification of table names; By default, sequelize will automatically
@@ -31,12 +27,62 @@ const user = (sequelize, Sequelize) => {
         freezeTableName: true,
     });
 
+
     return user;
+};
+
+
+const doctor = (sequelize, Sequelize) => {
+    const user = sequelize.define("doctors", {
+        user_id: {
+            primaryKey: true,
+            type: Sequelize.STRING,
+
+        },
+        username: {
+            type: Sequelize.STRING
+        },
+        password: {
+            type: Sequelize.STRING
+        },
+        email: {
+            type: Sequelize.STRING
+        },
+        sex: {
+            type: Sequelize.STRING
+        },
+        birthday: {
+            type: Sequelize.DATE
+        },
+        currentPosting: {
+            type: Sequelize.STRING
+        },
+        specialization: {
+            type: Sequelize.STRING
+        },
+        position: {
+            type: Sequelize.STRING
+        }
+    }, {
+        // disable the modification of table names; By default, sequelize will automatically
+        // transform all passed model names (first parameter of define) into plural.
+        // if you don't want that, set the following
+        freezeTableName: true,
+    });
+
+    return doctor;
 };
 
 const scoreCard = (sequelize, Sequelize) => {
     const scoreCard = sequelize.define("scoreCards", {
 
+        userID: {
+            type: Sequelize.STRING,
+            references: {         // User belongsTo Company 1:1
+                model: 'user',
+                key: 'user_id'
+              }
+        },
         height: {
             type: Sequelize.INTEGER
         },
@@ -50,7 +96,6 @@ const scoreCard = (sequelize, Sequelize) => {
     }, {
         freezeTableName: true
     })
-
     return scoreCard
 }
 
@@ -70,5 +115,5 @@ const healthJournal = (sequelize, Sequelize) => {
 }
 
 module.exports = {
-    user, healthJournal, scoreCard
+    user, healthJournal, scoreCard, doctor
 }

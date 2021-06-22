@@ -1,5 +1,4 @@
 const { Sequelize } = require("sequelize");
-const { DataTypes } = require("Sequelize");
 const databaseConfig = require("../database/sqlconfig");
 
 const sequelize = new Sequelize(databaseConfig.DATABASE, databaseConfig.USER, databaseConfig.PASSWORD, {
@@ -20,8 +19,18 @@ database = {};
 database.Sequelize = Sequelize;
 database.sequelize = sequelize;
 
-const { user } = require("./models.js");
+const { user,  healthJournal, scoreCard, doctor } = require("./models.js");
 database.user = user(sequelize, Sequelize);
+database.healthJournal = healthJournal(sequelize, Sequelize);
+database.scoreCard = scoreCard(sequelize, Sequelize);
+database.doctor = doctor(sequelize, Sequelize);
+
+database.user.hasMany(database.scoreCard, {
+})
+
+
+database.scoreCard.belongsTo(database.user, {})
+
 module.exports = {
     database
 }
